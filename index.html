@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071b33">
+  <meta name="description" content="Voltex Panel Builder — industrial automation, electrical control panels, PLC and VFD solutions in Odisha, India.">
+  <title>Voltex Panel Builder | Industrial Automation & Control Panels</title>
+  <style>
+    :root {
+      --navy: #071b33; --navy2: #0d2c4d; --blue: #0877d1; --cyan: #28c4dc;
+      --ink: #14263a; --muted: #63758a; --line: #dce6ef; --pale: #f3f8fc;
+      --white: #fff; --green: #16a36a; --shadow: 0 18px 45px rgba(7,27,51,.12);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--ink); line-height: 1.6; background: #fff; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    .wrap { width: min(1160px, calc(100% - 40px)); margin: auto; }
+    .topbar { background: #041326; color: #c8d7e7; font-size: 13px; }
+    .topbar-inner { min-height: 38px; display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+    .topbar a { color: #fff; font-weight: 700; }
+    header { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.96); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(220,230,239,.9); }
+    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .brand-mark { width: 43px; height: 43px; flex: 0 0 43px; border-radius: 12px; display: grid; place-items: center; color: #fff; font-weight: 900; font-size: 20px; background: linear-gradient(135deg, var(--blue), var(--cyan)); box-shadow: 0 8px 18px rgba(8,119,209,.25); }
+    .brand-name { font-weight: 850; letter-spacing: -.4px; color: var(--navy); line-height: 1.1; }
+    .brand-tag { font-size: 11px; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 5px; }
+    .nav-links { display: flex; align-items: center; gap: 25px; color: #40536a; font-size: 14px; font-weight: 650; }
+    .nav-links a:hover { color: var(--blue); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; border: 0; border-radius: 10px; padding: 13px 18px; font-weight: 750; cursor: pointer; transition: transform .2s, box-shadow .2s, background .2s; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { color: #fff; background: linear-gradient(135deg, var(--blue), #0564b2); box-shadow: 0 10px 24px rgba(8,119,209,.22); }
+    .btn-dark { color: #fff; background: var(--navy); }
+    .btn-outline { color: var(--navy); border: 1px solid #cbd9e6; background: #fff; }
+    .menu-btn { display: none; border: 1px solid var(--line); background: #fff; border-radius: 9px; padding: 9px 12px; font-size: 20px; }
+    .hero { overflow: hidden; position: relative; background: radial-gradient(ellipse at 80% 30%, rgba(40,196,220,.18), transparent 32%), linear-gradient(125deg, #06182d, #0b2a4a 60%, #0b3a61); color: #fff; }
+    .hero:after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .16; background-image: linear-gradient(rgba(255,255,255,.12) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.12) 1px, transparent 1px); background-size: 42px 42px; mask-image: linear-gradient(90deg, transparent, black); }
+    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 50px; padding: 82px 0 88px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: #8ce9f4; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.8px; }
+    .eyebrow:before { content: ""; width: 25px; height: 2px; background: var(--cyan); }
+    h1 { margin: 18px 0 20px; font-size: clamp(38px, 5.2vw, 64px); line-height: 1.04; letter-spacing: -2.4px; max-width: 700px; }
+    h1 span { color: #63d9ec; }
+    .hero p { color: #c3d5e7; font-size: 17px; max-width: 600px; margin: 0 0 28px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero .btn-outline { color: #fff; border-color: rgba(255,255,255,.28); background: rgba(255,255,255,.05); }
+    .hero-note { display: flex; gap: 12px; align-items: center; color: #b6c9dc; font-size: 12px; margin-top: 27px; }
+    .status-dot { width: 8px; height: 8px; background: #49dfa0; border-radius: 50%; box-shadow: 0 0 0 5px rgba(73,223,160,.12); }
+    .panel-visual { min-height: 390px; position: relative; display: grid; place-items: center; }
+    .glow { position: absolute; width: 320px; height: 320px; border-radius: 50%; background: rgba(8,119,209,.22); filter: blur(35px); }
+    .cabinet { width: min(330px, 82%); height: 365px; position: relative; border: 9px solid #b8c5cf; border-radius: 10px; background: linear-gradient(110deg, #e9eef1, #aebbc4 18%, #f6f8f9 24%, #c7d0d6); box-shadow: 25px 28px 45px rgba(0,0,0,.35), inset 0 0 0 2px #fff; transform: perspective(900px) rotateY(-9deg) rotateX(2deg); }
+    .cabinet:before { content: ""; position: absolute; left: 13px; top: 16px; bottom: 16px; width: 2px; background: rgba(75,91,103,.24); }
+    .cabinet-label { position: absolute; top: 20px; left: 29px; right: 29px; padding: 8px 5px; text-align: center; background: #102b47; color: #dff7ff; font-size: 11px; font-weight: 900; letter-spacing: 1.6px; border-radius: 3px; }
+    .drive { position: absolute; left: 37px; top: 72px; width: 130px; height: 180px; background: linear-gradient(90deg,#16283b,#30465a); border: 3px solid #738391; border-radius: 5px; box-shadow: 4px 5px 8px #74818a; padding: 12px; }
+    .drive-screen { height: 38px; background: #103c4f; border: 2px solid #597c88; border-radius: 2px; color: #70f1ff; display: grid; place-items: center; font-size: 9px; font-weight: 800; }
+    .drive-buttons { display: flex; justify-content: center; gap: 7px; margin: 13px 0; }
+    .drive-buttons i { display: block; width: 14px; height: 14px; border-radius: 3px; background: #9bb4c1; border: 1px solid #d6e3e8; }
+    .drive-slots { height: 58px; background: repeating-linear-gradient(0deg,#111e2b 0 4px,#415160 4px 6px); border-radius: 2px; }
+    .breakers { position: absolute; right: 28px; top: 77px; display: flex; gap: 7px; }
+    .breaker { width: 30px; height: 64px; background: linear-gradient(90deg,#f8fafb,#cbd4da); border: 1px solid #8998a2; border-radius: 3px; position: relative; }
+    .breaker:before { content: ""; position: absolute; top: 20px; left: 8px; width: 12px; height: 17px; background: #263b4d; border-radius: 2px; }
+    .breaker:after { content: ""; position: absolute; top: 5px; left: 6px; width: 16px; height: 7px; background: #42bb81; border-radius: 2px; }
+    .contactors { position: absolute; right: 32px; top: 166px; width: 86px; height: 74px; background: #dbe2e6; border: 2px solid #9ba9b2; border-radius: 3px; display: grid; grid-template-columns: repeat(3,1fr); gap: 4px; padding: 6px; }
+    .contactors i { background: linear-gradient(#f5f7f8,#9eabb4); border: 1px solid #8997a0; border-radius: 2px; }
+    .terminals { position: absolute; left: 29px; right: 27px; bottom: 44px; height: 28px; display: flex; gap: 3px; }
+    .terminals i { flex: 1; background: #d9e1e6; border: 1px solid #8797a1; border-top: 5px solid #e0b744; border-radius: 2px; }
+    .wire { position: absolute; width: 4px; height: 56px; bottom: 8px; left: 62px; background: #e54b4b; box-shadow: 9px 0 #278be5, 18px 0 #e8bd3c, 27px 0 #42a36d; }
+    .floating-card { position: absolute; padding: 13px 15px; border: 1px solid rgba(255,255,255,.24); border-radius: 12px; background: rgba(6,25,44,.8); backdrop-filter: blur(10px); box-shadow: 0 15px 30px rgba(0,0,0,.18); }
+    .floating-card strong { display: block; font-size: 12px; color: #fff; }
+    .floating-card small { color: #a8c1d6; font-size: 10px; }
+    .fc-one { top: 38px; right: 0; } .fc-two { bottom: 35px; left: 0; }
+    .section { padding: 82px 0; }
+    .section-soft { background: var(--pale); }
+    .section-head { max-width: 680px; margin-bottom: 35px; }
+    .kicker { color: var(--blue); font-size: 12px; font-weight: 850; letter-spacing: 1.7px; text-transform: uppercase; }
+    h2 { margin: 9px 0 12px; font-size: clamp(28px, 3.5vw, 42px); line-height: 1.14; letter-spacing: -1.2px; color: var(--navy); }
+    .section-head p { color: var(--muted); margin: 0; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 25px; box-shadow: 0 7px 22px rgba(7,27,51,.035); transition: transform .2s, box-shadow .2s; }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .iconbox { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 13px; color: var(--blue); background: #eaf5ff; margin-bottom: 19px; }
+    .iconbox svg { width: 25px; height: 25px; }
+    .card h3 { margin: 0 0 8px; color: var(--navy); font-size: 18px; letter-spacing: -.3px; }
+    .card p { margin: 0; color: var(--muted); font-size: 14px; }
+    .tag { display: inline-block; margin-top: 17px; color: #0877d1; font-size: 11px; font-weight: 800; letter-spacing: .5px; text-transform: uppercase; }
+    .products { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .product-card { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: #fff; }
+    .product-art { min-height: 185px; display: grid; place-items: center; background: linear-gradient(135deg,#e9f4fc,#f8fbfe); position: relative; overflow: hidden; }
+    .product-art:before { content: ""; position: absolute; width: 210px; height: 210px; border: 1px solid #c8dfef; border-radius: 50%; }
+    .mini-panel { width: 106px; height: 138px; position: relative; z-index: 1; border: 5px solid #9aaab6; border-radius: 5px; background: linear-gradient(110deg,#f9fbfc,#c9d3da); box-shadow: 10px 12px 18px rgba(7,27,51,.16); }
+    .mini-panel:before { content: ""; display: block; height: 15px; background: #0b2b4c; margin: 10px 9px; border-radius: 2px; }
+    .mini-panel:after { content: ""; display: block; width: 11px; height: 11px; margin: 14px auto; background: #20b977; border-radius: 50%; box-shadow: 22px 0 #e84b4b, 44px 0 #efb32f; }
+    .mini-panel.drive-look:before { height: 48px; background: linear-gradient(#16344e 0 45%,#5bd2e5 45% 51%,#1e3348 51%); }
+    .mini-panel.drive-look:after { width: 52px; height: 40px; background: repeating-linear-gradient(0deg,#25394c 0 4px,#879aa8 4px 6px); border-radius: 2px; box-shadow: none; }
+    .mini-panel.plc-look:before { height: 18px; background: repeating-linear-gradient(90deg,#1d4e78 0 13px,#c6d8e4 13px 16px); }
+    .product-copy { padding: 22px; }
+    .product-copy h3 { margin: 0 0 8px; font-size: 17px; color: var(--navy); }
+    .product-copy p { margin: 0; font-size: 14px; color: var(--muted); }
+    .split { display: grid; grid-template-columns: .9fr 1.1fr; gap: 55px; align-items: center; }
+    .feature-list { display: grid; gap: 17px; margin-top: 25px; }
+    .feature { display: flex; align-items: flex-start; gap: 13px; }
+    .check { width: 25px; height: 25px; flex: 0 0 25px; border-radius: 50%; background: #e3f8ef; color: var(--green); display: grid; place-items: center; font-weight: 900; font-size: 14px; margin-top: 2px; }
+    .feature strong { display: block; color: var(--navy); font-size: 14px; margin-bottom: 2px; }
+    .feature span { display: block; color: var(--muted); font-size: 13px; }
+    .process-box { background: var(--navy); color: #fff; padding: 34px; border-radius: 22px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+    .process-box:after { content: "V"; position: absolute; right: -6px; bottom: -70px; font-size: 260px; line-height: 1; font-weight: 900; color: rgba(255,255,255,.035); }
+    .process-box h3 { margin: 0 0 22px; font-size: 23px; position: relative; z-index: 1; }
+    .process-step { display: flex; gap: 15px; padding: 16px 0; border-top: 1px solid rgba(255,255,255,.13); position: relative; z-index: 1; }
+    .step-num { width: 34px; height: 34px; flex: 0 0 34px; border-radius: 10px; display: grid; place-items: center; background: rgba(40,196,220,.14); color: #70e7f5; font-weight: 850; }
+    .process-step strong { display: block; font-size: 14px; }
+    .process-step span { display: block; color: #afc3d6; font-size: 12px; margin-top: 3px; }
+    .cta-band { padding: 40px; border-radius: 22px; color: #fff; background: linear-gradient(120deg,#0877d1,#07528e); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .cta-band h2 { color: #fff; margin: 0 0 7px; font-size: 29px; }
+    .cta-band p { margin: 0; color: #d7edff; }
+    .contact-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 35px; }
+    .contact-info { background: var(--navy); color: #fff; padding: 30px; border-radius: var(--radius); }
+    .contact-info h3 { margin: 0 0 10px; font-size: 24px; }
+    .contact-info p { color: #b9ccde; font-size: 14px; }
+    .contact-line { display: flex; gap: 12px; align-items: center; padding: 16px 0; border-top: 1px solid rgba(255,255,255,.13); }
+    .contact-line .iconbox { width: 38px; height: 38px; flex: 0 0 38px; margin: 0; color: #77e4f2; background: rgba(40,196,220,.13); }
+    .contact-line small { display: block; color: #9fb6ca; font-size: 11px; }
+    .contact-line strong { display: block; font-size: 14px; overflow-wrap: anywhere; }
+    .contact-form { padding: 30px; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; }
+    .contact-form h3 { margin: 0 0 20px; color: var(--navy); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    label { display: block; color: #44576c; font-size: 12px; font-weight: 750; margin-bottom: 7px; }
+    .field { margin-bottom: 15px; }
+    input, select, textarea { width: 100%; padding: 12px 13px; border: 1px solid #d6e1ea; border-radius: 9px; color: var(--ink); background: #fbfdff; outline: none; }
+    input:focus, select:focus, textarea:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(8,119,209,.1); }
+    textarea { min-height: 105px; resize: vertical; }
+    .form-note { color: var(--muted); font-size: 11px; margin: 10px 0 0; }
+    footer { background: #041326; color: #a8bbcd; padding: 28px 0; font-size: 12px; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+    .footer-brand { color: #fff; font-weight: 800; }
+    .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
+    .wa-float { position: fixed; right: 20px; bottom: 20px; z-index: 25; display: flex; align-items: center; gap: 9px; background: #19a765; color: #fff; padding: 13px 17px; border-radius: 999px; box-shadow: 0 12px 30px rgba(0,0,0,.2); font-size: 13px; font-weight: 800; }
+    .wa-float svg { width: 20px; height: 20px; }
+    .notice { background: #fff8e7; border: 1px solid #f4dfab; color: #795d1e; padding: 12px 14px; border-radius: 10px; font-size: 12px; margin-top: 18px; }
+    @media (max-width: 900px) {
+      .nav-links { gap: 14px; font-size: 13px; } .nav-cta { display: none; }
+      .hero-grid { gap: 15px; grid-template-columns: 1fr .8fr; } .panel-visual { transform: scale(.88); }
+      .grid-3, .products { grid-template-columns: repeat(2,1fr); }
+      .split { gap: 28px; }
+    }
+    @media (max-width: 680px) {
+      .wrap { width: min(100% - 30px, 1160px); }
+      .topbar-inner { padding: 8px 0; }
+      .nav { min-height: 68px; } .menu-btn { display: block; }
+      .nav-links { display: none; position: absolute; left: 0; right: 0; top: 68px; background: #fff; padding: 18px 22px 22px; border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; gap: 0; box-shadow: 0 18px 25px rgba(7,27,51,.08); }
+      .nav-links.open { display: flex; } .nav-links a { padding: 11px 0; }
+      .hero-grid { grid-template-columns: 1fr; padding: 58px 0 40px; }
+      h1 { letter-spacing: -1.6px; font-size: clamp(39px, 11vw, 54px); }
+      .hero p { font-size: 15px; }
+      .panel-visual { min-height: 350px; transform: scale(.88); margin: -12px 0 -30px; }
+      .fc-one { right: -6px; } .fc-two { left: -6px; }
+      .section { padding: 60px 0; }
+      .grid-3, .products, .split, .contact-grid { grid-template-columns: 1fr; }
+      .grid-3 { gap: 14px; } .products { gap: 15px; }
+      .split { gap: 30px; }
+      .cta-band { padding: 28px 22px; align-items: flex-start; flex-direction: column; }
+      .cta-band h2 { font-size: 25px; }
+      .form-grid { grid-template-columns: 1fr; gap: 0; }
+      .contact-info, .contact-form { padding: 23px; }
+      .wa-float { right: 12px; bottom: 12px; padding: 12px 14px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *:before, *:after { transition: none !important; } }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="wrap topbar-inner">
+      <span>Industrial Automation &amp; Electrical Panel Solutions</span>
+      <span>Odisha, India &nbsp;·&nbsp; <a href="tel:+918249797656">+91 82497 97656</a></span>
+    </div>
+  </div>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#home" aria-label="Voltex Panel Builder home">
+        <span class="brand-mark">V</span>
+        <span><span class="brand-name">VOLTEX PANEL BUILDER</span><span class="brand-tag">Control · Connect · Automate</span></span>
+      </a>
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="#services">Services</a><a href="#products">Panels</a><a href="#approach">Our Approach</a><a href="#contact">Contact</a>
+      </nav>
+      <a class="btn btn-primary nav-cta" href="#contact">Request a Quote <span aria-hidden="true">↗</span></a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open navigation" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Industrial solutions · Odisha</div>
+          <h1>Control your process.<br><span>Power your progress.</span></h1>
+          <p>Industrial automation and electrical panel solutions designed around your application — from motor and VFD control to PLC-based machine automation.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact">Discuss Your Project <span aria-hidden="true">→</span></a>
+            <a class="btn btn-outline" href="#products">Explore Panel Solutions</a>
+          </div>
+          <div class="hero-note"><span class="status-dot"></span><span>Enquiries welcome for new panels, upgrades and automation support.</span></div>
+        </div>
+        <div class="panel-visual" aria-label="Illustration of an industrial electrical control panel">
+          <div class="glow"></div>
+          <div class="floating-card fc-one"><strong>VFD &amp; Motor Control</strong><small>Speed · Protection · Control</small></div>
+          <div class="cabinet">
+            <div class="cabinet-label">VOLTEX · CONTROL PANEL</div>
+            <div class="drive"><div class="drive-screen">DRIVE READY</div><div class="drive-buttons"><i></i><i></i><i></i></div><div class="drive-slots"></div></div>
+            <div class="breakers"><i class="breaker"></i><i class="breaker"></i><i class="breaker"></i></div>
+            <div class="contactors"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="terminals"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="wire"></div>
+          </div>
+          <div class="floating-card fc-two"><strong>Engineered for the application</strong><small>Clear layout · Serviceable wiring</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">What we do</div>
+          <h2>Practical automation for real-world operations.</h2>
+          <p>Support for industrial electrical control and automation needs, with solutions scoped to your process, equipment and operating environment.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card">
+            <div class="iconbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="2.5" width="16" height="19" rx="2"/><rect x="7" y="5.5" width="10" height="4" rx="1"/><path d="M8 13h2m4 0h2M8 17h2m4 0h2"/></svg></div>
+            <h3>Electrical Panel Building</h3><p>Motor control and electrical control panels with organized component layout, wiring and terminal arrangements to suit the project requirements.</p><span class="tag">Design · Assembly · Testing</span>
+          </article>
+          <article class="card">
+            <div class="iconbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2 4 14h7l-1 8 10-13h-7l1-7Z"/></svg></div>
+            <h3>VFD &amp; Motor Control</h3><p>Variable-speed drive panels, motor control, speed-reference integration, operating controls and fault indication for suitable applications.</p><span class="tag">Drive · Motor · Protection</span>
+          </article>
+          <article class="card">
+            <div class="iconbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 8h3v3H8zM14 8h3M14 10h3M8 15h9M6 2v2m12-2v2"/></svg></div>
+            <h3>PLC &amp; HMI Automation</h3><p>PLC logic, HMI operator screens, interlocks, alarms and field I/O integration for machine and process automation.</p><span class="tag">Logic · HMI · I/O</span>
+          </article>
+          <article class="card">
+            <div class="iconbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-1.7 2.9-.2-.1a1.7 1.7 0 0 0-1.8.1l-.2.1h-3.4l-.1-.2a1.7 1.7 0 0 0-1.7-.9l-.2.1-2.9-1.7.1-.2a1.7 1.7 0 0 0-.1-1.8l-.1-.2v-3.4l.2-.1a1.7 1.7 0 0 0 .9-1.7l-.1-.2 1.7-2.9.2.1a1.7 1.7 0 0 0 1.8-.1l.2-.1h3.4l.1.2a1.7 1.7 0 0 0 1.7.9l.2-.1 2.9 1.7-.1.2a1.7 1.7 0 0 0 .1 1.8l.1.2v3.4Z" transform="translate(-1 -1) scale(1.08)"/></svg></div>
+            <h3>Retrofit &amp; Upgrades</h3><p>Panel modifications, control upgrades, drive replacements and improvements to existing automation systems, subject to site assessment.</p><span class="tag">Modernize · Improve</span>
+          </article>
+          <article class="card">
+            <div class="iconbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V5m0 14h16"/><path d="m7 15 4-4 3 2 5-6"/><path d="M16 7h3v3"/></svg></div>
+            <h3>Commissioning Support</h3><p>Drive and control-system checks, parameter setup, I/O verification and troubleshooting support as agreed for the project.</p><span class="tag">Verify · Commission</span>
+          </article>
+          <article class="card">
+            <div class="iconbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v3m0 12v3M3 12h3m12 0h3"/><circle cx="12" cy="12" r="7"/><path d="m9 12 2 2 4-4"/></svg></div>
+            <h3>Application-Based Solutions</h3><p>Control concepts for pumps, conveyors, utilities and other applications after reviewing operating requirements and site conditions.</p><span class="tag">Scope · Specify · Deliver</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="products">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">Panel solutions</div>
+          <h2>Built around your equipment and process.</h2>
+          <p>These are example solution categories. Final design, component selection, ratings and pricing are confirmed after technical discussion.</p>
+        </div>
+        <div class="products">
+          <article class="product-card"><div class="product-art"><div class="mini-panel drive-look"></div></div><div class="product-copy"><h3>VFD Control Panel</h3><p>For variable-speed motor applications requiring speed control, drive status and suitable electrical protection.</p></div></article>
+          <article class="product-card"><div class="product-art"><div class="mini-panel"></div></div><div class="product-copy"><h3>Motor Control Panel</h3><p>Motor starting and control arrangements selected for the load, starting method and installation conditions.</p></div></article>
+          <article class="product-card"><div class="product-art"><div class="mini-panel plc-look"></div></div><div class="product-copy"><h3>PLC Automation Panel</h3><p>PLC, I/O, power supplies, relays and terminals for machine logic and process-control integration.</p></div></article>
+          <article class="product-card"><div class="product-art"><div class="mini-panel"></div></div><div class="product-copy"><h3>Pump Control Panel</h3><p>Automatic pump sequencing and level/pressure-based control options, designed for the application.</p></div></article>
+          <article class="product-card"><div class="product-art"><div class="mini-panel plc-look"></div></div><div class="product-copy"><h3>PLC + HMI Retrofit</h3><p>Operator interface and control upgrades for suitable existing machines and equipment.</p></div></article>
+          <article class="product-card"><div class="product-art"><div class="mini-panel drive-look"></div></div><div class="product-copy"><h3>Custom Control Solutions</h3><p>Application-specific panels and control logic scoped against your drawings and functional requirements.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="approach">
+      <div class="wrap split">
+        <div>
+          <div class="kicker">A clear process</div>
+          <h2>From requirement to a maintainable solution.</h2>
+          <p style="color:var(--muted)">Good panel design starts with understanding the machine, its operating conditions and the people who will maintain it.</p>
+          <div class="feature-list">
+            <div class="feature"><div class="check">✓</div><div><strong>Application-first discussion</strong><span>Clarify motor ratings, supply, control philosophy, I/O and site environment.</span></div></div>
+            <div class="feature"><div class="check">✓</div><div><strong>Thoughtful component layout</strong><span>Plan segregation, wiring routes, terminals, service access and heat management.</span></div></div>
+            <div class="feature"><div class="check">✓</div><div><strong>Testing before handover</strong><span>Agree inspection, electrical checks, functional tests and documentation for each project.</span></div></div>
+          </div>
+          <div class="notice"><strong>Safety note:</strong> Final panel designs must be validated against applicable electrical standards, equipment-manufacturer instructions and the specific installation. This website is not a substitute for approved drawings or engineering checks.</div>
+        </div>
+        <div class="process-box">
+          <h3>How a project can move forward</h3>
+          <div class="process-step"><div class="step-num">01</div><div><strong>Share your requirement</strong><span>Send motor data, application details, photos or an existing drawing.</span></div></div>
+          <div class="process-step"><div class="step-num">02</div><div><strong>Review the scope</strong><span>Confirm control functions, protections, components and site requirements.</span></div></div>
+          <div class="process-step"><div class="step-num">03</div><div><strong>Receive a proposal</strong><span>Discuss the technical scope, delivery expectations and quotation.</span></div></div>
+          <div class="process-step"><div class="step-num">04</div><div><strong>Build, test and support</strong><span>Proceed after the design and commercial terms are approved.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="wrap">
+        <div class="cta-band">
+          <div><h2>Planning a panel or automation upgrade?</h2><p>Tell us what you need to control. Start with a no-obligation enquiry.</p></div>
+          <a class="btn btn-dark" href="https://wa.me/918249797656?text=Hello%20Voltex%20Panel%20Builder%2C%20I%20would%20like%20to%20discuss%20an%20industrial%20automation%20requirement." target="_blank" rel="noopener">Chat on WhatsApp ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">Contact Voltex</div>
+          <h2>Let's discuss your requirement.</h2>
+          <p>Share a few details and the enquiry form will prepare a WhatsApp message for you to review and send.</p>
+        </div>
+        <div class="contact-grid">
+          <aside class="contact-info">
+            <h3>Voltex Panel Builder</h3>
+            <p>Industrial automation and electrical panel solutions for customers in Odisha, India.</p>
+            <div class="contact-line"><div class="iconbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 11.2 18a19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 3.2 2 2 0 0 1 4.1 1h3a2 2 0 0 1 2 1.7l.5 3a2 2 0 0 1-.6 1.9L7.1 9.5a16 16 0 0 0 6 6l1.9-1.9a2 2 0 0 1 1.9-.6l3 .5a2 2 0 0 1 2.1 2.4Z"/></svg></div><div><small>Call / WhatsApp</small><strong><a href="tel:+918249797656">+91 82497 97656</a></strong></div></div>
+            <div class="contact-line"><div class="iconbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></div><div><small>Service location</small><strong>Odisha, India</strong></div></div>
+            <div class="contact-line"><div class="iconbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m3 6 9 7 9-7"/></svg></div><div><small>Email</small><strong>Use WhatsApp to start an enquiry</strong></div></div>
+            <p style="font-size:11px;margin-top:22px">No public email address has been added yet. Add your business email before publishing if you want email enquiries.</p>
+          </aside>
+          <form class="contact-form" id="enquiryForm">
+            <h3>Project enquiry</h3>
+            <div class="form-grid">
+              <div class="field"><label for="name">Your name *</label><input id="name" name="name" required placeholder="Name"></div>
+              <div class="field"><label for="business">Company / business</label><input id="business" name="business" placeholder="Company name (optional)"></div>
+            </div>
+            <div class="form-grid">
+              <div class="field"><label for="service">Requirement *</label><select id="service" name="service" required><option value="">Select a service</option><option>VFD control panel</option><option>Motor control panel</option><option>PLC / HMI automation</option><option>Pump control panel</option><option>Retrofit / troubleshooting</option><option>Other industrial automation</option></select></div>
+              <div class="field"><label for="motor">Motor rating / application</label><input id="motor" name="motor" placeholder="e.g. 7.5 kW pump"></div>
+            </div>
+            <div class="field"><label for="message">Project details *</label><textarea id="message" name="message" required placeholder="Describe what you want the panel or automation system to do."></textarea></div>
+            <button class="btn btn-primary" type="submit">Prepare WhatsApp Enquiry ↗</button>
+            <p class="form-note">This form does not store or send data to a server. It opens WhatsApp with your message so you can review and send it yourself.</p>
+            <p id="formStatus" class="form-note" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <div><span class="footer-brand">VOLTEX PANEL BUILDER</span><br><span>Industrial Automation &amp; Panel Solutions · Odisha, India</span></div>
+      <div class="footer-links"><a href="#services">Services</a><a href="#products">Panel solutions</a><a href="#contact">Contact</a><a href="https://wa.me/918249797656" target="_blank" rel="noopener">WhatsApp</a></div>
+      <div>© <span id="year"></span> Voltex Panel Builder. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <a class="wa-float" href="https://wa.me/918249797656?text=Hello%20Voltex%20Panel%20Builder%2C%20I%20have%20an%20enquiry." target="_blank" rel="noopener" aria-label="Chat with Voltex Panel Builder on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.5 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.2-4.7A8.5 8.5 0 1 1 20.5 11.5Z"/><path d="M8.5 8.2c.3-.6.6-.6.9-.6h.4c.2 0 .4.1.5.4l.7 1.7c.1.2.1.4-.1.6l-.5.6c-.2.2-.2.4-.1.6.4.7 1 1.3 1.7 1.7.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.6.8c.2.1.3.3.3.5 0 .3-.2 1-.6 1.3-.4.4-1.1.6-1.8.5-1-.2-2.2-.8-3.3-1.8-1.2-1.1-2-2.5-2.2-3.4-.2-.8.1-1.5.6-1.9Z"/></svg>
+    WhatsApp Us
+  </a>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    menuBtn.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(open));
+      menuBtn.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+      menuBtn.textContent = open ? '×' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.textContent = '☰';
+    }));
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('enquiryForm').addEventListener('submit', event => {
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
+      const parts = [
+        'Hello Voltex Panel Builder, I would like to enquire about an industrial automation project.',
+        'Name: ' + data.get('name'),
+        data.get('business') ? 'Company: ' + data.get('business') : '',
+        'Requirement: ' + data.get('service'),
+        data.get('motor') ? 'Motor rating / application: ' + data.get('motor') : '',
+        'Project details: ' + data.get('message')
+      ].filter(Boolean);
+      document.getElementById('formStatus').textContent = 'Opening WhatsApp. Please review your message and tap Send.';
+      window.open('https://wa.me/918249797656?text=' + encodeURIComponent(parts.join('\n')), '_blank', 'noopener');
+    });
+  </script>
+</body>
+</html>
